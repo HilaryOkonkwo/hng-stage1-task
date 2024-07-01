@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const config = require('./config.json');
 
 const IP_GEOLOCATION_API_KEY ="3c157014abe54a2fa062bf9ded9f4c5c";
 const WEATHERAPI_KEY ="1f659253b7024c0885602159240107";
