@@ -1,9 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
+const config = require('./config.json');
 
-const IP_GEOLOCATION_API_KEY = '3c157014abe54a2fa062bf9ded9f4c5c';
-const WEATHERAPI_KEY = '1f659253b7024c0885602159240107';
+const IP_GEOLOCATION_API_KEY = config.IP_GEOLOCATION_API_KEY ;
+const WEATHERAPI_KEY = config.WEATHERAPI_KEY;
 
 app.set('trust proxy', true);
 
@@ -35,6 +36,10 @@ app.get('/api/hello', async (req, res) => {
         res.json(response);
     } catch (error) {
         console.error('Error fetching data:', error);
+        if (error.response) {
+            console.error('Response Status:', error.response.status);
+            console.error('Response Data:', error.response.data);
+        }
         res.status(500).json({ error: 'Internal Server Error', details: error.message});
     }
 });
