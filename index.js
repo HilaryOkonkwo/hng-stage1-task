@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+const IP_GEOLOCATION_API_KEY = process.env.IP_GEOLOCATION_API_KEY;
+const WEATHERAPI_KEY = process.env.WEATHERAPI_KEY;
+
 app.set('trust proxy', true);
 
 app.get('/api/hello', async (req, res) => {
