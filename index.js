@@ -32,6 +32,11 @@ app.get('/api/hello', async (req, res) => {
             greeting: `Hello, ${visitorName}!, the temperature is ${temperature} degrees Celsius in ${location}`
         };
 
+        // Set the Content-Type header to application/json
+        res.setHeader('Content-Type', 'application/json');
+       // Send the response with 2-space indentation for readability
+        res.send(JSON.stringify(response, null, 2));
+
         res.json(response);
     } catch (error) {
         console.error('Error fetching data:', error);
