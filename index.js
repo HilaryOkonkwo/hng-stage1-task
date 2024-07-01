@@ -8,12 +8,12 @@ const WEATHERAPI_KEY = '1f659253b7024c0885602159240107';
 app.set('trust proxy', true);
 
 app.get('/api/hello', async (req, res) => {
-    const visitorName = req.query.visitor_name;
+    const visitorName = req.query.visitor_name || 'Guest';
     let clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
     // Handle local IP addresses
     if (clientIp === '::1' || clientIp === '127.0.0.1') {
-        clientIp = '8.8.4.4'; // Use a default IP address for testing, such as Google's public DNS server
+        clientIp = '8.8.8.8'; // Use a default IP address for testing, such as Google's public DNS server
     }
 
     try {
@@ -35,7 +35,7 @@ app.get('/api/hello', async (req, res) => {
         res.json(response);
     } catch (error) {
         console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error', details: error.message});
     }
 });
 
